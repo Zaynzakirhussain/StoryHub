@@ -1,8 +1,36 @@
 import React from 'react';
 import { Touchable } from 'react-native';
 import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
+import db from '../config';
+import firebase from 'firebase';
 
 export default class WriteStoryScreen extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      title: '',
+      author: '',
+      story: ''
+    }
+  }
+
+  submitStory = async () => {
+    db.collection("title")
+      .doc(this.state.title)
+
+    db.collection("author")
+      .doc(this.state.author)
+
+    db.collection("story")
+      .doc(this.state.story)
+
+    this.setState({
+      title: "",
+      author: "",
+      story: ""
+    })
+  }
+
   render() {
     return (
       <View>
@@ -11,19 +39,29 @@ export default class WriteStoryScreen extends React.Component {
         <TextInput
           style={styles.title}
           placeholder="Title of the story..."
+          onChangeText={text => this.setState({ title: text })}
+          value={this.state.title}
         />
 
         <TextInput
           style={styles.author}
           placeholder="Name of author..."
+          onChangeText={text => this.setState({ author: text })}
+          value={this.state.author}
         />
 
         <TextInput
           style={styles.story}
           placeholder="Write the story..."
+          onChangeText={text => this.setState({ story: text })}
+          value={this.state.story}
         />
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.submitStory("title","author","story")
+          }}>
           <Text>Submit</Text>
         </TouchableOpacity>
 
