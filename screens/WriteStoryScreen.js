@@ -33,39 +33,41 @@ export default class WriteStoryScreen extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text style={styles.headerText}>Write your story...</Text>
+      <KeyboardAvoidingView style={{ alignItems: 'center', marginTop: 20 }}>
+        <View>
+          <Text style={styles.headerText}>Write your story...</Text>
 
-        <TextInput
-          style={styles.title}
-          placeholder="Title of the story..."
-          onChangeText={text => this.setState({ title: text })}
-          value={this.state.title}
-        />
+          <TextInput
+            style={styles.title}
+            placeholder="Title of the story..."
+            onChangeText={text => this.setState({ title: text })}
+            value={this.state.title}
+          />
 
-        <TextInput
-          style={styles.author}
-          placeholder="Name of author..."
-          onChangeText={text => this.setState({ author: text })}
-          value={this.state.author}
-        />
+          <TextInput
+            style={styles.author}
+            placeholder="Name of author..."
+            onChangeText={text => this.setState({ author: text })}
+            value={this.state.author}
+          />
 
-        <TextInput
-          style={styles.story}
-          placeholder="Write the story..."
-          onChangeText={text => this.setState({ story: text })}
-          value={this.state.story}
-        />
+          <TextInput
+            style={styles.story}
+            placeholder="Write the story..."
+            onChangeText={text => this.setState({ story: text })}
+            value={this.state.story}
+          />
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            this.submitStory("title","author","story")
-          }}>
-          <Text>Submit</Text>
-        </TouchableOpacity>
-
-      </View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              this.submitStory("title", "author", "story"),
+                Alert.alert("EPICO, You have just submitted a story to the HUB...")
+            }}>
+            <Text>Submit</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }
